@@ -2,13 +2,49 @@ MD.Canvas = function(){
 
   const el = document.getElementById("svgcanvas");
   var workarea = document.getElementById("workarea");
-
-  workarea.addEventListener("mouseup", function(){
+  var mouseX0 = 0;
+  var mouseY0 = 0;
+  var canvasMoved = 0;
+  workarea.addEventListener("mouseup", function(ev){
     const mode = svgCanvas.getMode();
     // todo why?
-    //if (mode !== "textedit" && mode !== "pathedit") state.set("canvasMode", mode);
+    console.log("MD.Canvas::mouseup");
+    console.log(mode);
+    if (mode !== "textedit" && mode !== "pathedit") {
+      //state.set("canvasMode", mode);
+      svgCanvas.setMode('select');
+    }
+
     workarea.className = mode;
-  })
+    if (canvasMoved) {
+      workarea.style.cursor= "auto";
+    }
+  });
+
+  workarea.addEventListener("mousedown", function(ev){
+    // zhangxh 中键按下移动画板
+    if (ev.buttons & 0x4) {
+      console.log("mousemove mid1");
+      //console.log(ev);
+      mouseX0 = ev.clientX;
+      mouseY0 = ev.clientY;
+      workarea.style.cursor= "move";
+      canvasMoved = 1;
+    }
+  });
+
+  workarea.addEventListener("mousemove", function(ev){
+    // zhangxh 中键按下移动画板
+    if (ev.buttons & 0x4) {
+      console.log("mousemove mid2");
+      var dx = ev.clientX - mouseX0;
+      var dy = ev.clientY - mouseY0;
+      mouseX0 = ev.clientX;
+      mouseY0 = ev.clientY;
+
+      moveCanvas(dx, dy);
+    }
+  });
 
   $('#resolution').change(function(){
     var w = $('#canvas_width')[0];
@@ -44,13 +80,13 @@ MD.Canvas = function(){
         var progress = Date.now() - start;
         var tick = progress / duration;
         tick = (Math.pow((tick-1), 3) +1);
-        w.value = (dims[0] - diff_w + (tick*diff_w)).toFixed(0);
-        h.value = (dims[1] - diff_h + (tick*diff_h)).toFixed(0);
+        w.value = (dims[0] - diff_w + (tick*diff_w)).toFixed(2);
+        h.value = (dims[1] - diff_h + (tick*diff_h)).toFixed(2);
         changeSize();
         if (tick >= 1) {
           var res = svgCanvas.getResolution()
-          $('#canvas_width').val(res.w.toFixed())
-          $('#canvas_height').val(res.h.toFixed())
+          $('#canvas_width').val(res.w.toFixed(2))
+          $('#canvas_height').val(res.h.toFixed(2))
           $('#resolution_label').html("<div class='pull'>" + res.w + "<span>×</span></br>" + res.h + "</div>");
         }
         else {
@@ -133,6 +169,17 @@ MD.Canvas = function(){
       workarea.scrollTop = new_ctr.y - h_orig/2;
     }
 
+    editor.rulers.update();
+    workarea.scroll();
+  }
+  
+  // zhangxh
+  function moveCanvas(dx, dy) {
+    var x0 = workarea.scrollLeft;
+    var y0 = workarea.scrollTop;
+
+    workarea.scrollLeft = workarea.scrollLeft - dx;
+    workarea.scrollTop = workarea.scrollTop - dy;
     editor.rulers.update();
     workarea.scroll();
   }
