@@ -1,21 +1,23 @@
-MD.Image = function(){
+MD.Image = function () {
 
   const reader = new FileReader();
 
-  function importImage(e){
+  function importImage(e) {
     const file = (e.type === "drop") ? e.dataTransfer.files[0] : this.files[0];
-    if (!file || file.type.indexOf("image") ) return alert("That doesn't seem to be an image");
-    
-    if(file.type.indexOf("svg") != -1) importSvg(file)
+    if (!file || file.type.indexOf("image")) return alert("That doesn't seem to be an image");
+
+    if (file.type.indexOf("svg") != -1) importSvg(file)
     else importImageFile(file);
   }
 
   function importImageFile(file) {
-    
-    reader.onloadend = function(e) {
+
+    console.log("importImageFile", file);
+
+    reader.onloadend = function (e) {
       // lets insert the new image until we know its dimensions
-      insertNewImage = function(img_width, img_height){
-          var newImage = svgCanvas.addSvgElementFromJson({
+      insertNewImage = function (img_width, img_height) {
+        var newImage = svgCanvas.addSvgElementFromJson({
           "element": "image",
           "attr": {
             "x": 0,
@@ -38,7 +40,7 @@ MD.Image = function(){
       var img = new Image()
       img.src = e.target.result
       document.body.appendChild(img);
-      img.onload = function() {
+      img.onload = function () {
         img_width = img.offsetWidth
         img_height = img.offsetHeight
         insertNewImage(img_width, img_height);
@@ -48,8 +50,8 @@ MD.Image = function(){
     reader.readAsDataURL(file)
   }
 
-  function importSvgFile(file){
-    reader.onloadend = function(e) {
+  function importSvgFile(file) {
+    reader.onloadend = function (e) {
       importSvg(e.target.result);
     };
     reader.readAsText(file);
@@ -63,19 +65,19 @@ MD.Image = function(){
 
   const workarea = document.getElementById("workarea");
 
-  workarea.addEventListener('dragenter', function(e){
+  workarea.addEventListener('dragenter', function (e) {
     e.stopPropagation();
     e.preventDefault();
     workarea.style.transform = "scale(1.1)";
   }, false)
 
-  workarea.addEventListener('dragleave', function(e){
+  workarea.addEventListener('dragleave', function (e) {
     e.stopPropagation();
     e.preventDefault();
     workarea.style.transform = "scale(1)";
   }, false)
 
-  workarea.addEventListener('drop', function(e){
+  workarea.addEventListener('drop', function (e) {
     e.stopPropagation();
     e.preventDefault();
     workarea.style.transform = "scale(1)";
@@ -84,5 +86,5 @@ MD.Image = function(){
 
 
   this.importImage = importImage;
-}         
+}
 

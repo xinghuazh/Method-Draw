@@ -1,10 +1,10 @@
-#zoom_panel,
-#zoom_select {
+#zoom_panel, #zoom_select {
   padding: var(--x2) 0;
-  right: calc(var(--panel-width) + var(--x2));
+  right: calc(var(--panel-width) *2 + var(--x2));
   position: absolute;
   cursor:  pointer;
   width:  100px;
+  z-index: 1;
 }
 
 #zoom_label:after {

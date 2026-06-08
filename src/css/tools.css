@@ -1,11 +1,28 @@
 #tools_left {
   position: absolute;
   border-right: none;
-  width: var(--x12);
+  left: 0;
+  width: calc(var(--left-width));
   top: var(--x8);
   bottom: 0;
-  left: 0;
   z-index: 4;
+}
+
+ #tools_bottom {
+  position: absolute;
+  left: 0;
+  width: calc(var(--left-width));
+  bottom: 0;
+  height: var(--x10);
+  overflow: visible;
+}
+
+.shape_group {
+  display: flex;
+}
+
+.shape_hidden {
+  display: none;
 }
 
 .tool_button {

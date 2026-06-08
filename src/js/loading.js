@@ -13,6 +13,14 @@
     }
   };
 
+  // 打印调用堆栈的函数
+  printstack = function (title) {
+    const err = new Error();
+    const stack = err.stack.split('\n').slice(2); // 获取调用者的堆栈
+    console.log(title || "Stack trace", { stack: stack });
+  };
+
+  //
   const canvasContent = localStorage.getItem("md-canvasContent");
   const isDark = localStorage.getItem("md-darkmode");
   if (!isDark && isDark !== null) document.body.classList.add("inverted");
@@ -24,6 +32,9 @@
 
   const parser = new DOMParser();
   const doc = parser.parseFromString(canvasContent, "image/svg+xml");
+  console.log("doc", {doc});
+  console.log("doc.documentElement", doc.documentElement);
+
   const workarea = document.getElementById("workarea");
   workarea.appendChild(doc.documentElement);
   const svgCanvas = document.getElementById("svgcanvas");

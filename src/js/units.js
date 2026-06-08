@@ -147,6 +147,8 @@ var attrsToConvert = {
   "ellipse": ['cx', 'cy', 'rx', 'ry'],
   "foreignObject": ['x', 'y', 'width', 'height'],
   "rect": ['x', 'y', 'width', 'height'],
+  "qr": ['x', 'y', 'width', 'height'],
+  "barcode": ['x', 'y', 'width', 'height'],
   "image": ['x', 'y', 'width', 'height'],
   "use": ['x', 'y', 'width', 'height'],
   "text": ['x', 'y']

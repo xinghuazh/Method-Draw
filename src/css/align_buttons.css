@@ -1,5 +1,6 @@
 .align_buttons {
   margin-bottom: var(--x2);
+  background: transparent;
 }
 
 .align_button,
@@ -14,9 +15,10 @@
 
 .align_button {
   float: left;
-  height: var(--x13);
-  width: var(--x13);
-  line-height: var(--x16);
+  /* height: var(--x13);
+  width: var(--x13); */
+  padding: var(--x1);
+  /* line-height: var(--x16); */
   text-align: center;
   cursor: pointer;
   position: relative;

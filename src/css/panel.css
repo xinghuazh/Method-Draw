@@ -1,44 +1,129 @@
  #panels {
-  position: absolute;
-  box-sizing: border-box;
-  width: var(--panel-width);
-  right: var(--x1);
-  top: var(--x5);
-  bottom: 0;
-  border-bottom: none;
-  overflow: auto;
-  padding: 0;
-}
+   position: absolute;
+   box-sizing: border-box;
+   width: var(--panel-width);
+   right: var(--x2);
+   top: var(--x8);
+   /* bottom: 0; */
+   background: rgba(5, 5, 5, 0.95);
+   border-bottom: none;
+   overflow: auto;
+   padding: 0;
+ }
 
-.context_panel {
-  display: none;
-}
+ .context_panel {
+   display: none;
+ }
 
-.context_panel h4 {
-  color: var(--z15);
-  font-weight: normal;
-  margin: 0;
-  padding: 10px 0 5px 0;
-}
+ .context_panel h4 {
+   color: var(--z15);
+   font-weight: normal;
+   margin: 0;
+   padding: 10px 0 5px 0;
+ }
 
-.context_panel label {
-  display: block;
-  color: var(--z13);
-  white-space: nowrap;
-}
+ .context_panel label {
+   display: block;
+   color: var(--z13);
+   white-space: nowrap;
+ }
 
-#align_tools {
-  display: none;
-}
+ #align_tools {
+   display: none;
+ }
 
-#panels.multiselected #multiselected_panel {
-  display: block !important;
-}
+ #panels.multiselected #multiselected_panel {
+   display: block !important;
+ }
 
-#panels.multiselected #multiselected_panel .hidable {
-  display: none;
-}
+ #panels.multiselected #multiselected_panel .hidable {
+   display: none;
+ }
 
-#tool_text_on_path {
-  display: none !important;
-}
+ #tool_text_on_path {
+   display: none !important;
+ }
+
+ /* 可折叠面板样式 */
+ .collapsible-panel {
+   /* border: 1px solid #ddd; */
+   border-radius: 4px;
+   /* margin-bottom: 10px; */
+   background: rgba(44, 62, 80, 0.95);
+   transition: all 0.3s ease;
+ }
+
+ /* 面板头部 */
+ .collapsible-panel .panel-header {
+   display: flex;
+   /* justify-content: space-between; */
+   align-items: center;
+   padding: 0;
+   cursor: pointer;
+   user-select: none;
+   background: rgba(44, 62, 80, 0.95);
+   border-radius: 4px 4px 0 0;
+   transition: background 0.2s;
+   border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+ }
+
+ .collapsible-panel .panel-header:hover {
+   background: rgba(44, 62, 80, 0.55);
+ }
+
+ .collapsible-panel .panel-header h4 {
+   margin: 0;
+   font-size: 14px;
+   font-weight: 600;
+   padding-left: 10px;
+   padding-right: 10px;
+ }
+
+ /* 折叠按钮 */
+ .collapse-btn {
+   background: none;
+   border: none;
+   font-size: 18px;
+   cursor: pointer;
+   padding: 0;
+   width: 24px;
+   height: 24px;
+   line-height: 1;
+   color: #666;
+   transition: transform 0.01s ease;
+ }
+
+ .collapse-btn:hover {
+   color: #333;
+ }
+
+ /* 面板内容区域 */
+ .collapsible-panel .panel-content {
+   padding: 5px;
+   transition: all 0.01s ease;
+   overflow: hidden;
+ }
+
+ /* 折叠状态 */
+ .collapsible-panel.collapsed .panel-content {
+   padding: 0 5px;
+   max-height: 0 !important;
+   opacity: 0;
+   visibility: hidden;
+ }
+
+ .collapsible-panel.collapsed .collapse-btn {
+   transform: rotate(0deg);
+ }
+
+ /* 展开状态（默认） */
+ .collapsible-panel:not(.collapsed) .panel-content {
+   max-height: 500px;
+   /* 根据内容调整，或使用其他方式 */
+   opacity: 1;
+   visibility: visible;
+ }
+
+ .collapsible-panel:not(.collapsed) .collapse-btn {
+   transform: rotate(0deg);
+ }

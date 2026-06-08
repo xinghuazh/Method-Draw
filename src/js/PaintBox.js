@@ -2,7 +2,7 @@ MD.PaintBox = function(container, type){
   var _self = this;
   var colorPicker = function(elem) {
     var picker = elem[0].id === 'stroke_color' ? 'stroke' : 'fill';
-    var is_background = elem[0].id === "canvas_color"
+    var is_background = 0; // elem[0].id === "canvas_color"
     if (is_background) picker = 'canvas'
     var paint = editor.paintBox[picker].paint;
     
@@ -259,9 +259,9 @@ MD.PaintBox = function(container, type){
     }
   });
   
-  $('#tool_canvas').on("click touchstart", function(){
-      editor.paintBox.canvas.colorPicker($('#canvas_color'));
-  });
+  // $('#tool_canvas').on("click touchstart", function(){
+  //     editor.paintBox.canvas.colorPicker($('#canvas_color'));
+  // });
 
   $('#tool_switch').on("click touchstart", function(){
     editor.switchPaint();

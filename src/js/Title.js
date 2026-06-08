@@ -1,7 +1,7 @@
-MD.Title = function(){
-  
+MD.Title = function () {
+
   $('#canvas_title')
-    .keydown(function(e){
+    .keydown(function (e) {
       e.stopPropagation();
       if (e.key === "Escape") {
         this.blur();
@@ -10,12 +10,12 @@ MD.Title = function(){
         this.blur();
       }
     })
-    .keyup(function(e){
+    .keyup(function (e) {
       e.stopPropagation();
       svgCanvas.setDocumentTitle(this.value);
       state.set("canvasTitle", this.value);
     })
-    .click(function(e) {
+    .click(function (e) {
       this.focus();
       this.select();
     })

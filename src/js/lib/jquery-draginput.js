@@ -39,7 +39,7 @@ $.fn.dragInput = function(cfg){
     var $cursor = (area && this.dragCfg.cursor)
       ? $("<div class='draginput_cursor' />").appendTo($label) 
       : false
-    $input.attr("readonly", "readonly")
+    //$input.attr("readonly", "readonly")
     if ($cursor && !isNaN(this.dragCfg.start)) $cursor.css("top", (this.dragCfg.start*-1)/scale+cursorHeight)
    
     //this is where all the magic happens  

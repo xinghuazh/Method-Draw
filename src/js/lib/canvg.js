@@ -92,6 +92,7 @@ if(!Array.prototype.indexOf){
 	function build() {
 		var svg = { };
 		
+		consolole.log("build enter");
 		svg.FRAMERATE = 30;
 		svg.MAX_VIRTUAL_PIXELS = 30000;
 		
@@ -149,6 +150,7 @@ if(!Array.prototype.indexOf){
 		
 		// parse xml
 		svg.parseXml = function(xml) {
+		consolole.log("parseXml");
 			if (window.DOMParser)
 			{
 				var parser = new DOMParser();

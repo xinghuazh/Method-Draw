@@ -1,3 +1,6 @@
+
+console.log("step 1 ");
+
 editor.keyboard = new MD.Keyboard();
 editor.menu = new MD.Menu();
 editor.toolbar = new MD.Toolbar();
@@ -9,7 +12,7 @@ editor.zoom = new MD.Zoom();
 editor.paintBox = {
   fill: new MD.PaintBox('#fill_color', 'fill'),
   stroke: new MD.PaintBox('#stroke_color', 'stroke'),
-  canvas: new MD.PaintBox('#canvas_color', 'canvas')
+  //canvas: new MD.PaintBox('#canvas_color', 'canvas')
 };
 editor.palette = new MD.Palette();
 editor.pan = new MD.Pan();
@@ -19,6 +22,7 @@ editor.contextMenu = new MD.ContextMenu();
 editor.darkmode = new MD.Darkmode();
 editor.title = new MD.Title();
 
+console.log("step 2 ");
 // bind the selected event to our function that handles updates to the UI
 svgCanvas.bind("selected", editor.selectedChanged);
 svgCanvas.bind("transition", editor.elementTransition);
@@ -33,15 +37,18 @@ const eyedropper = svgCanvas.addExtension.apply(this, ["eyedropper", MD.Eyedropp
 state.set("canvasId", t("Untitled"));
 state.set("canvasMode", state.get("canvasMode"));
 
+console.log("step 3 ");
 // load from param
 if (!window.location.search.includes("?load=")) {
+console.log("step 3.1 ");
   svgCanvas.setSvgString(state.get("canvasContent"));
 }
 else {
-  
-  const error = function(err) {
-      console.log(err);
-      svgCanvas.setSvgString(state.get("canvasContent"));
+
+console.log("step 4 ");
+  const error = function (err) {
+    console.log(err);
+    svgCanvas.setSvgString(state.get("canvasContent"));
   }
 
   const url = utils.findGetParameter("load");
@@ -54,6 +61,7 @@ else {
     .catch(error);
 }
 
+console.log("step 5 ");
 state.set("canvasTitle", svgCanvas.getDocumentTitle());
 
 //editor.paintBox.fill.setPaint(state.get("canvasFill"));
@@ -62,3 +70,6 @@ state.set("canvasTitle", svgCanvas.getDocumentTitle());
 
 document.body.classList.remove("loading");
 document.getElementById("svgcanvas").removeAttribute("title");
+
+console.log("step 6 ");
+console.log("start.js leave ");

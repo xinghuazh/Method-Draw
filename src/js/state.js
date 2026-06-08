@@ -1,4 +1,4 @@
-function State(){
+function State() {
 
   const _self = this;
   const tenThousandThings = dao.map(thing => thing.name);
@@ -6,10 +6,13 @@ function State(){
   const ID = window.location.pathname;
 
   this.data = _loadData();
-  
+
   this.set = (key, val) => {
+    console.log("Setting", { key, val });
+    printstack("State.set called");
+
     key = key.split("-")[0] || key;
-    if (tenThousandThings.indexOf(key) === -1) return console.warn( key + " not implemented");
+    if (tenThousandThings.indexOf(key) === -1) return console.warn(key + " not implemented");
     const archetype = dao.find(thing => thing.name === key);
     val = _self.data[_getKey(key)] = archetype.clean(val);
     if (~saveableKeys.indexOf(key)) _save(_getKey(key), val);
@@ -20,19 +23,19 @@ function State(){
     return _self.data[_getKey(key)];
   }
 
-  this.refresh = ()     => { dao.forEach(thing => this[thing.name]( this.get(thing.name) ) ); }
-  
+  this.refresh = () => { dao.forEach(thing => this[thing.name](this.get(thing.name))); }
+
   // canvas data
-  this.canvasId = (id)      => {/* noop */}
-  this.canvasMode = (mode)  => { editor.toolbar.setMode(mode) }
-  this.canvasTitle = (str)  => { editor.canvas.rename(str) }
-  this.canvasSize = (size)  => { editor.canvas.resize(...size) }
-  this.canvasContent = (svgString)  => { /* noop */ }
-  this.canvasRulers = (bool)  => { /* noop */ }
-  this.canvasFill = (paint)  => { /* noop */ }
-  this.canvasStroke = (paint)  => { /* noop */ }
-  this.canvasBackground = (paint)  => { /* noop */ }
-  this.darkmode = (isDark)  => { editor.darkmode.set(isDark) }
+  this.canvasId = (id) => {/* noop */ }
+  this.canvasMode = (mode) => { editor.toolbar.setMode(mode) }
+  this.canvasTitle = (str) => { editor.canvas.rename(str) }
+  this.canvasSize = (size) => { editor.canvas.resize(...size) }
+  this.canvasContent = (svgString) => { /* noop */ }
+  this.canvasRulers = (bool) => { /* noop */ }
+  this.canvasFill = (paint) => { /* noop */ }
+  this.canvasStroke = (paint) => { /* noop */ }
+  this.canvasBackground = (paint) => { /* noop */ }
+  this.darkmode = (isDark) => { editor.darkmode.set(isDark) }
 
   this.clean = (warn = true) => {
     if (warn) {
@@ -47,6 +50,8 @@ function State(){
   // INNER UTILS
 
   function _save(key, val) {
+    console.log("Saving", { key, val });
+
     // basic checks
     if (val === undefined || val === null) throw "wont save nuthin, " + key + " " + val;
     const isObject = dao.find(thing => thing.name === key).type === "object";
@@ -57,7 +62,7 @@ function State(){
     //const key = name.indexOf("canvas") !== -1
     //      ? name + "-" + ID
     //      : name + "-0"; // system
-     return name;
+    return name;
   }
 
   function _loadData() {
@@ -71,6 +76,8 @@ function State(){
   };
 
   function _getValue(key, def) {
+    console.log("Loading", { key, def });
+
     const item = localStorage.getItem("md-" + key) || def;
     const archetype = dao.find(thing => thing.name === key.split("-")[0]);
     if (archetype) return archetype.clean(item);

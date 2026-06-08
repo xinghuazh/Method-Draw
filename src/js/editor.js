@@ -220,8 +220,8 @@ MD.Editor = function(){
       const multiselected = (elems.length >= 2 && elems[1] != null) ? elems : null;
       // Only updating fields for single elements for now
       if(!multiselected && mode === "rotate") {
-        var rotate_string = 'rotate('+ svgCanvas.getRotationAngle(elem) + 'deg)';
-        $('#tool_angle_indicator').css("transform", rotate_string);
+        //var rotate_string = 'rotate('+ svgCanvas.getRotationAngle(elem) + 'deg)';
+        //$('#tool_angle_indicator').css("transform", rotate_string);
       }
       svgCanvas.runExtensions("elementTransition", {
         elems: elems
@@ -246,7 +246,7 @@ MD.Editor = function(){
 
   function changeBlur(ctl, completed){
     // todo not receiving ctl
-    const val = $('#blur').val();
+    const val = $('#item_blur').val();
     if (completed) {
       svgCanvas.setBlur(val, true);
     }
@@ -257,12 +257,12 @@ MD.Editor = function(){
 
   function changeRotationAngle(ctl){
     const val = document.getElementById("angle").value;
-    const indicator = document.getElementById("tool_angle_indicator");
+    //const indicator = document.getElementById("tool_angle_indicator");
     const reorient = document.getElementById("tool_reorient");
     const preventUndo = true;
 
     svgCanvas.setRotationAngle(val, preventUndo);
-    indicator.style.transform = 'rotate('+ val + 'deg)'
+    //indicator.style.transform = 'rotate('+ val + 'deg)'
     reorient.classList.toggle("disabled", val === 0);
 
   }
@@ -395,7 +395,7 @@ MD.Editor = function(){
   this.reorientPath = reorientPath;
   this.escapeMode = escapeMode;
   this.extensionAdded = extensionAdded;
-  this.changeBlur = changeBlur;
+  //this.changeBlur = changeBlur;
   this.changeRotationAngle = changeRotationAngle;
   this.exportHandler = exportHandler;
   this.toggleWireframe = toggleWireframe;
